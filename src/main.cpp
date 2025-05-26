@@ -24,7 +24,7 @@ int main ()
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 	std::cout << "Inicializando sistema de juego..." << std::endl;
 
-	// Create the window and OpenGL context
+	// Create the window and OpenGL context 
 	InitWindow(1280, 800, "Ecos del Crepusculo");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
