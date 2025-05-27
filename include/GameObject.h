@@ -1,20 +1,37 @@
 #pragma once
 #include "raylib.h"
+#include "string"
+#include <iostream>
 namespace Quetz_LabEDC
 {
 
 
     class GameObject
     {
-    public:
-        Vector2 position;  // Posición en el mundo
-        float width, height;  // Tamaño del objeto
-        Texture2D texture;  // Textura opcional
+	public:
+		Vector2 position;
+		std::string name;
+		//imagen del objeto
+		Texture texture;
+		bool DisplayName = false;
 
-        GameObject(float x, float y, float w, float h, Texture2D tex); // Constructor
-        virtual void Update();  // Método para actualizar el objeto (puede ser sobreescrito)
-        virtual void Draw();  // Método para dibujar el objeto
+		//constructor predeterminado
+		GameObject() :
+			position({ 0,0 }),
+			name("GameObject"),
+			texture({ 0 }) {
+		}
 
+
+		//constructor
+		GameObject(Vector2 pos, std::string _name, Texture tex) :
+			position(pos), name(_name), texture(tex) {
+		}
+
+		//actualizar posicion
+		virtual void update();
+		// dibujar o renderizar el objeto
+		virtual void draw();
 
     };
 }

@@ -1,27 +1,27 @@
 #include "Sidekick.h"
 
-namespace Quetz_LabEDC
-{
+
+
     using namespace Quetz_LabEDC;
 
 
-    sideKick::sideKick(float x, float y, float w, float h, Texture2D tex, float speed)
-        : GameObject(x, y, w, h, tex), followSpeed(speed) 
-    {
-        targetPosition = { x, y };
-    }
+	void sideKick::update()
+	{
+		//moverse hacia el jugador hasta cierta distancia
 
-    void sideKick::Follow(Vector2 playerPos) {
-        targetPosition = playerPos;
 
-        // Movimiento suave hacia la posición del jugador
-        position.x += (targetPosition.x - position.x) * followSpeed;
-        position.y += (targetPosition.y - position.y) * followSpeed;
-    }
+		if (owner != nullptr)
+		{
+			Vector2 dir = Vector2Subtract(owner->position, position);
 
-    void sideKick::Update() 
-    {
-        Follow(targetPosition);
-    }
+			float distance = Vector2Length(dir);
 
-}
+			if (distance > 50)
+			{
+				dir = Vector2Normalize(dir);
+				position = Vector2Add(position, Vector2Scale(dir, speed * GetFrameTime()));
+			}
+		}
+
+	}
+

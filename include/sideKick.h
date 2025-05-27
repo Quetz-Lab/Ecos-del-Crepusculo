@@ -1,5 +1,8 @@
 #pragma once
 #include "GameObject.h"
+#include "Player.h"
+#include "raymath.h"
+
 
 namespace Quetz_LabEDC
 {
@@ -8,13 +11,27 @@ namespace Quetz_LabEDC
         public GameObject
     {
 
-        public:
-            Vector2 targetPosition;  // Posición a la que sigue (puede ser el jugador)
-            float followSpeed;
+	public:
+		float speed = 100;
+		//referencia al gameobject al que sirve este sidekick
+		GameObject* owner;
 
-            sideKick(float x, float y, float w, float h, Texture2D tex, float speed);
-            void Follow(Vector2 playerPos);  // Método para seguir al jugador
-            void Update() override;  // Sobreescribimos la actualización
+		//constructor heredado de GameObject
+		sideKick(Vector2 pos, std::string _name, Texture tex) :
+			owner(nullptr),
+			GameObject(pos, _name, tex)
+		{
+		}
+		void update() override;
+
+		void attack()
+		{
+			std::cout << name << "Atacando" << std::endl;
+		}
+		void flee()
+		{
+			std::cout << name << "Huye como cobarde" << std::endl;
+		}
 
 
     };
