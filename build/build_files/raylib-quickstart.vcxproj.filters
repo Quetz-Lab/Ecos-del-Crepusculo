@@ -18,11 +18,13 @@
     <ClInclude Include="..\..\include\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\GameObject.h" />
     <ClInclude Include="..\..\include\sideKick.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\IAttacker.h" />
     <ClInclude Include="..\..\include\Weapon.h" />
+    <ClInclude Include="..\..\include\GameObject.h">
+      <Filter>Widows Resoruce Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">

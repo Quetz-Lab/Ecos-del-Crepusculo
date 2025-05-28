@@ -26,9 +26,34 @@ int main ()
 
 	// Create the window and OpenGL context 
 	InitWindow(1280, 800, "Ecos del Crepusculo");
+		// Unload the logo texture after use
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
+	Texture2D logo = LoadTexture("Logo.png");
+	float alpha = 0.0f;	// Variable to control the alpha transparency of the logo
+	float fadeSpeed = 0.5f;	// Speed at which the logo fades in and out
+	SetTargetFPS(60);	// Set the target FPS to 60
+	std::cout << "Ventana creada, FPS objetivo establecido a 60." << std::endl;
+	while (alpha < 1.0f)
+	{
+		alpha += fadeSpeed;
+		BeginDrawing();	// Begin drawing to the window
+		ClearBackground(BLACK);	// Clear the background to black
+		DrawTexture(logo, (1280 - logo.width) / 2, (800 - logo.height) / 2, Fade(WHITE, alpha));	// Draw the logo texture at the center of the window with fading effect
+		EndDrawing();	// End drawing to the window
+	
+	}
+	float timer = 0.0f;	// Variable to keep track of time
+	while (timer < 3.0f)
+	{
+		timer += GetFrameTime();	// Increment timer by the time elapsed since the last frame
+		BeginDrawing();	// Begin drawing to the window
+		ClearBackground(RAYWHITE);	// Clear the background to white
+		DrawTexture(logo, (1280 - logo.width)/2, (800 - logo.height)/2, WHITE);	// Draw the logo texture at position (250, 150)
+		EndDrawing();	// End drawing to the window
+	}
+	UnloadTexture(logo);
 
 	std::vector<GameObject*> gameObjects;
 
@@ -40,7 +65,7 @@ int main ()
 	//El jugador
 	// este constructor ya no existe, ahora el Player establece su textura
 	//Player* playerCharacter = new Player({ 0,0 }, "Player1", LoadTexture("boy.png"));
-	Player* playerCharacter = new Player({ 100,100 }, "Player1");
+	Player* playerCharacter = new Player({ 100,100 }, "Player1"); 
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion
@@ -101,7 +126,7 @@ int main ()
 		ClearBackground(SKYBLUE);
 
 		// draw some text using the default font
-		DrawText("Ejemplo de Juego con GameObjects", 10, 10, 24, YELLOW);
+		DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, YELLOW);
 		for (GameObject* obj : gameObjects)
 		{
 			obj->draw();
