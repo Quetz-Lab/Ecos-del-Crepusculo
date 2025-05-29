@@ -18,7 +18,14 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 using namespace Quetz_LabEDC;
 
-int main ()
+enum MenuOption
+{
+	PLAY, SETTINGS, EXIT
+};
+MenuOption selectedOption = PLAY;
+// variable to keep track of the selected menu option
+
+int main()
 {
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
@@ -26,32 +33,31 @@ int main ()
 
 	// Create the window and OpenGL context 
 	InitWindow(1280, 800, "Ecos del Crepusculo");
-		// Unload the logo texture after use
+	// Unload the logo texture after use
 
-	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
+// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
 	Texture2D logo = LoadTexture("Logo.png");
 	float alpha = 0.0f;	// Variable to control the alpha transparency of the logo
 	float fadeSpeed = 0.5f;	// Speed at which the logo fades in and out
 	SetTargetFPS(60);	// Set the target FPS to 60
 	std::cout << "Ventana creada, FPS objetivo establecido a 60." << std::endl;
-	//while (alpha < 1.0f)
-	//{
-	//	alpha += fadeSpeed;
-	//	BeginDrawing();	// Begin drawing to the window
-	//	ClearBackground(BLACK);	// Clear the background to black
-	//	DrawTexture(logo, (1280 - logo.width) / 2, (800 - logo.height) / 2, Fade(WHITE, alpha));	// Draw the logo texture at the center of the window with fading effect
-	//	EndDrawing();	// End drawing to the window
-	//
-	//}
-	float timer = 0.0f;	// Variable to keep track of time
-	while (timer < 3.0f && (alpha < 1.0f))
+	while (alpha < 1.0f)
 	{
 		alpha += fadeSpeed;
+		BeginDrawing();	// Begin drawing to the window
+		ClearBackground(BLACK);	// Clear the background to black
+		DrawTexture(logo, (1280 - logo.width) / 2, (800 - logo.height) / 2, Fade(WHITE, alpha));	// Draw the logo texture at the center of the window with fading effect
+		EndDrawing();	// End drawing to the window
+
+	}
+	float timer = 0.0f;	// Variable to keep track of time
+	while (timer < 3.0f)
+	{
 		timer += GetFrameTime();	// Increment timer by the time elapsed since the last frame
 		BeginDrawing();	// Begin drawing to the window
 		ClearBackground(RAYWHITE);	// Clear the background to white
-		DrawTexture(logo, (1280 - logo.width)/2, (800 - logo.height)/2, WHITE);	// Draw the logo texture at position (250, 150)
+		DrawTexture(logo, (1280 - logo.width) / 2, (800 - logo.height) / 2, WHITE);	// Draw the logo texture at position (250, 150)
 		EndDrawing();	// End drawing to the window
 	}
 	UnloadTexture(logo);
@@ -66,7 +72,7 @@ int main ()
 	//El jugador
 	// este constructor ya no existe, ahora el Player establece su textura
 	//Player* playerCharacter = new Player({ 0,0 }, "Player1", LoadTexture("boy.png"));
-	Player* playerCharacter = new Player({ 100,100 }, "Player1"); 
+	Player* playerCharacter = new Player({ 100,100 }, "Player1");
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion
@@ -107,39 +113,84 @@ int main ()
 	}
 
 
-
-
-	// game loop a 60 fps
-	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
-	{
-		//aqui van los update
-		//actualizar todos los gameobjects
-		for (GameObject* obj : gameObjects)
-		{
-			obj->update();
+	while (!WindowShouldClose()) {
+		if (alpha < 1.0f) {
+			alpha += fadeSpeed;
 		}
 
 
-		// despues de beginDrawing consideraremos los draw
-		BeginDrawing();
-
-		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(SKYBLUE);
-
-		// draw some text using the default font
-		DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, YELLOW);
-		for (GameObject* obj : gameObjects)
-		{
-			obj->draw();
-		}
 
 
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
-		EndDrawing();
+			// Cambiar selección con flechas
+			if (IsKeyPressed(KEY_DOWN)) selectedOption = (MenuOption)((selectedOption + 1) % 3);
+			if (IsKeyPressed(KEY_UP)) selectedOption = (MenuOption)((selectedOption - 1 + 3) % 3);
+
+			BeginDrawing();
+			ClearBackground(DARKGRAY);
+
+			DrawText("ECOS DEL CREPÚSCULO", 480, 200, 40, Fade( WHITE, alpha));
+			DrawText((selectedOption == PLAY ? "> " : "  " "Jugar"), 550, 300, 30, Fade(WHITE, alpha));
+			DrawText((selectedOption == SETTINGS ? "> " : "  " "Configuracion"), 550, 350, 30, Fade(WHITE, alpha));
+			DrawText((selectedOption == EXIT ? "> " : "  " "Salir"), 550, 400, 30,Fade (WHITE, alpha));
+
+			EndDrawing();
+
+			if (IsKeyPressed(KEY_ENTER)) {
+				if (selectedOption == PLAY) {
+					while (alpha > 0.0f) {
+						alpha -= fadeSpeed;
+
+						BeginDrawing();
+						ClearBackground(DARKGRAY);
+						DrawText("ECOS DEL CREPÚSCULO", 480, 200, 40, Fade(WHITE, alpha));
+						DrawText("Cargando...", 550, 350, 30, Fade(WHITE, alpha));
+						EndDrawing();
+					}
+					break;  // Inicia el juego
+				}
+			}
+				if (selectedOption == EXIT) {
+					CloseWindow();
+					return 0;
+				}
 	}
 
+		
 
-	// destroy the window and cleanup the OpenGL context
-	CloseWindow();
-	return 0;
-}
+
+
+		// game loop a 60 fps
+		while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
+		{
+			//aqui van los update
+			//actualizar todos los gameobjects
+			for (GameObject* obj : gameObjects)
+			{
+				obj->update();
+			}
+
+
+			// despues de beginDrawing consideraremos los draw
+			BeginDrawing();
+
+			// Setup the back buffer for drawing (clear color and depth buffers)
+			ClearBackground(SKYBLUE);
+
+			// draw some text using the default font
+			DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, YELLOW);
+			for (GameObject* obj : gameObjects)
+			{
+				obj->draw();
+			}
+
+
+			// end the frame and get ready for the next one  (display frame, poll input, etc...)
+			EndDrawing();
+		}
+
+
+		// destroy the window and cleanup the OpenGL context
+		CloseWindow();
+		return 0;
+	
+};
