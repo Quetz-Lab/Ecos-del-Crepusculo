@@ -20,6 +20,7 @@ namespace  Quetz_LabEDC
 		Weapon(Vector2 pos, std::string _name, Texture tex) :
 			GameObject(pos, _name, tex)
 		{
+			owner = nullptr;
 			offset = { 30.0f, 10.0f };
 		}
 
@@ -40,6 +41,11 @@ namespace  Quetz_LabEDC
 			//std::cout << "Weapon update at position: " << position.x << ", " << position.y << std::endl;
 		}
 
+		void draw() override
+		{
+			Rectangle r = { 0,0,64,64 };
+			DrawTextureRec(texture, r, position, WHITE);
+		}
 	};
 }
 

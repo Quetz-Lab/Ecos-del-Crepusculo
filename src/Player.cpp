@@ -35,7 +35,7 @@ void Quetz_LabEDC::Player::update()
 		if (animData.currentFrame >= animData.maxFrames)
 			animData.currentFrame = 0;
 
-		std::cout << "Frame: " << animData.currentFrame << std::endl;
+		//std::cout << "Frame: " << animData.currentFrame << std::endl;
 	}
 
 	//si tiene arma, hacer que se mueva con el jugador
@@ -46,6 +46,17 @@ void Quetz_LabEDC::Player::update()
 	}
 
 	//detectar colisiones con armas tiradas en el suelo
+	for (GameObject* obj : GameObject::gameObjects)
+	{
+		Weapon* w = dynamic_cast<Weapon*>(obj);
+		if (w &&
+			w->owner == nullptr &&
+			CheckCollisionRecs({ position.x, position.y, animData.spriteWidth, animData.spriteHeight }))
+		{
+
+
+		}
+	}
 
 
 }

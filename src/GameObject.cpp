@@ -1,11 +1,14 @@
 #include "GameObject.h"
 
-void Quetz_LabEDC::GameObject::update()
+using namespace Quetz_LabEDC;
+
+std::vector<GameObject*> GameObject::gameObjects;
+void GameObject::update()
 {
 	//std::cout << name << " update" << std::endl;
 }
 
-void Quetz_LabEDC::GameObject::draw()
+void GameObject::draw()
 {
 
 	DrawTexture(texture, position.x, position.y, WHITE);

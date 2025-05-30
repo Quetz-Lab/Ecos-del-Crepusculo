@@ -11,7 +11,6 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include <vector>	// for std::vector
 #include "Player.h"	// utility header for Player class
 #include "sideKick.h"	// utility header for sideKick class
-
 #include "raylib.h"
 #include "GameObject.h"	// utility header for GameObject class
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
@@ -62,12 +61,12 @@ int main()
 	}
 	UnloadTexture(logo);
 
-	std::vector<GameObject*> gameObjects;
+	//std::vector<GameObject*> gameObjects;
 
 	GameObject* myObj = new GameObject({ 200,200 }, "myObj", LoadTexture("mono.png"));
 	myObj->DisplayName = true;
 	//push_back agrega un elemento al final del arreglo
-	gameObjects.push_back(myObj);  //cast implicito a GameObject*
+	GameObject::gameObjects.push_back(myObj);  //cast implicito a GameObject*
 
 	//El jugador
 	// este constructor ya no existe, ahora el Player establece su textura
@@ -76,27 +75,27 @@ int main()
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion
-	gameObjects.push_back(static_cast<GameObject*>(playerCharacter));
+	GameObject::gameObjects.push_back(static_cast<GameObject*>(playerCharacter));
 
 	//prueba de arma
 	Weapon* w = new Weapon({ 500, 500 }, "Sword", LoadTexture("sword.png"));
 	//playerCharacter->SetWeapon(w); //asignar el arma al jugador
-	gameObjects.push_back(w); //agregar el arma al arreglo de gameobjects
+	GameObject::gameObjects.push_back(w); //agregar el arma al arreglo de gameobjects
 
 	sideKick* sidekick = new sideKick({ 500,0 }, "Foo", LoadTexture("sidekick.png"));
 	sidekick->owner = playerCharacter;
 	sidekick->DisplayName = true;
 	sidekick->speed = 199.0f;
-	gameObjects.push_back(sidekick);
+	GameObject::gameObjects.push_back(sidekick);
 
 	sideKick* sidekick2 = new sideKick({ 800,600 }, "Bar", LoadTexture("karateka.png"));
 	sidekick2->owner = playerCharacter;
 	sidekick2->DisplayName = true;
 	sidekick2->speed = 190.0f;
-	gameObjects.push_back(sidekick2);
+	GameObject::gameObjects.push_back(sidekick2);
 
 	//Ejemplo de dynamic_cast
-	for (GameObject* obj : gameObjects)
+	for (GameObject* obj : GameObject::gameObjects)
 	{
 		//esta conversion es en tiempo de ejecucion
 		Player* p = dynamic_cast<Player*>(obj);
@@ -128,7 +127,7 @@ int main()
 			BeginDrawing();
 			ClearBackground(DARKGRAY);
 
-			DrawText("ECOS DEL CREPÚSCULO", 480, 200, 40, Fade( WHITE, alpha));
+			DrawText("STAR WARS: ECOS DEL CREPUSCULO", 480, 200, 40, Fade( WHITE, alpha));
 			DrawText((selectedOption == PLAY ? "> " : "  " "Jugar"), 550, 300, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == SETTINGS ? "> " : "  " "Configuracion"), 550, 350, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == EXIT ? "> " : "  " "Salir"), 550, 400, 30,Fade (WHITE, alpha));
@@ -164,7 +163,7 @@ int main()
 		{
 			//aqui van los update
 			//actualizar todos los gameobjects
-			for (GameObject* obj : gameObjects)
+			for (GameObject* obj : GameObject::gameObjects)
 			{
 				obj->update();
 			}
@@ -178,7 +177,7 @@ int main()
 
 			// draw some text using the default font
 			DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, YELLOW);
-			for (GameObject* obj : gameObjects)
+			for (GameObject* obj : GameObject::gameObjects)
 			{
 				obj->draw();
 			}

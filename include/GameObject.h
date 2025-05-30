@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "string"
 #include <iostream>
+#include <vector>
 namespace Quetz_LabEDC
 {
 
@@ -14,9 +15,11 @@ namespace Quetz_LabEDC
 		//imagen del objeto
 		Texture texture;
 		bool DisplayName = false;
+		static std::vector<GameObject*> gameObjects;
 
 		//constructor predeterminado
 		GameObject() :
+
 			position({ 0,0 }),
 			name("GameObject"),
 			texture({ 0 }) {
