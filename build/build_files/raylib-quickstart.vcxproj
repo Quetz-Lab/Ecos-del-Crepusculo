@@ -578,16 +578,22 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\GameObject.h" />
     <ClInclude Include="..\..\include\IAttacker.h" />
+    <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\include\sideKick.h" />
+    <ClInclude Include="..\..\include\UISystem.h" />
+    <ClInclude Include="..\..\include\View.h" />
     <ClInclude Include="..\..\include\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\GameObject.cpp" />
+    <ClCompile Include="..\..\src\Label.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Player.cpp" />
     <ClCompile Include="..\..\src\sideKick.cpp" />
+    <ClCompile Include="..\..\src\UISystem.cpp" />
+    <ClCompile Include="..\..\src\View.cpp" />
     <ClCompile Include="..\..\src\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>

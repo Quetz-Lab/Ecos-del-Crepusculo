@@ -14,7 +14,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "raylib.h"
 #include "GameObject.h"	// utility header for GameObject class
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
-
+#include "UISystem.h"	// utility header for UISystem class
 using namespace Quetz_LabEDC;
 
 enum MenuOption
@@ -110,7 +110,16 @@ int main()
 			sk->flee();
 		}
 	}
+	// inicializar los elementos de UI
+	UISystem::getInstance().test(); // probar el singleton de UI
+	UISystem::Test(); // probar el metodo estatico del singleton de UI
 
+	for (int i = 0; i < 20; i++)
+	{
+		UISystem::getInstance().createLabel(TextFormat("weeeeee %d", i), 100 + i * 10, 100 + i * 30, 12);
+	}
+
+	///UISystem::getInstance().createLabel("Bienbenido a mi juej0", 400, 400, 48);
 
 	while (!WindowShouldClose()) {
 		if (alpha < 1.0f) {
@@ -121,8 +130,8 @@ int main()
 
 
 			// Cambiar selección con flechas
-			if (IsKeyPressed(KEY_DOWN)) selectedOption = (MenuOption)((selectedOption + 1) % 3);
-			if (IsKeyPressed(KEY_UP)) selectedOption = (MenuOption)((selectedOption - 1 + 3) % 3);
+			if (IsKeyPressed(KEY_S)) selectedOption = (MenuOption)((selectedOption + 1) % 3);
+			if (IsKeyPressed(KEY_W)) selectedOption = (MenuOption)((selectedOption - 1 + 3) % 3);
 
 			BeginDrawing();
 			ClearBackground(DARKGRAY);
@@ -167,7 +176,7 @@ int main()
 			{
 				obj->update();
 			}
-
+			UISystem::Update(); //actualizar el sistema de UI
 
 			// despues de beginDrawing consideraremos los draw
 			BeginDrawing();
@@ -182,7 +191,7 @@ int main()
 				obj->draw();
 			}
 
-
+			UISystem::Draw();
 			// end the frame and get ready for the next one  (display frame, poll input, etc...)
 			EndDrawing();
 		}

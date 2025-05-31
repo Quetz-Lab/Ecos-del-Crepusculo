@@ -51,15 +51,27 @@ void Quetz_LabEDC::Player::update()
 		Weapon* w = dynamic_cast<Weapon*>(obj);
 		if (w &&
 			w->owner == nullptr &&
-			CheckCollisionRecs({ position.x, position.y, animData.spriteWidth, animData.spriteHeight }))
+			CheckCollisionRecs({ position.x, position.y, animData.spriteWidth, animData.spriteHeight }, {w->position.x, w->position.y,64,64}))
 		{
+			//std::cout << "Colision con arma: " << w->name << std::endl;
+			//SetWeapon(w); //cambiar el arma del jugador
+			shouldPromptForWeapon = true; //mostrar mensaje de recoger arma
 
-
+			if (IsKeyPressed(KEY_F)) //si se presiona F
+			{
+				SetWeapon(w); //cambiar el arma del jugador
+				shouldPromptForWeapon = false;
+			}
+			break;
 		}
+		else
+			shouldPromptForWeapon = false; //no hay arma cerca
 	}
-
-
 }
+	
+
+
+
 
 void Quetz_LabEDC::Player::draw()
 {
@@ -68,6 +80,9 @@ void Quetz_LabEDC::Player::draw()
 					animData.spriteWidth,
 					animData.spriteHeight };
 	DrawTextureRec(texture, r, position, WHITE);
+
+	if (shouldPromptForWeapon)
+		DrawText(weaponPrompt, 20, GetScreenHeight() - 40, 20, YELLOW);
 	//DrawTexture(texture, position.x, position.y, WHITE);
 }
 

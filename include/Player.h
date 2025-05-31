@@ -32,7 +32,10 @@ namespace Quetz_LabEDC
 
 		//instrumento que le permite atacar
 		IAttacker* weapon;
-		//Sidekick* coso;
+		sideKick* sdk;
+		sideKick* sidekicks[2];
+		bool shouldPromptForWeapon = false;
+		const char* weaponPrompt = "Presiona F para recoger arma";
 	public:
 		float speed = 10.0f;
 
