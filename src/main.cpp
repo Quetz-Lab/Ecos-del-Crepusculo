@@ -111,14 +111,14 @@ int main()
 		}
 	}
 	// inicializar los elementos de UI
-	UISystem::getInstance().test(); // probar el singleton de UI
-	UISystem::Test(); // probar el metodo estatico del singleton de UI
+	//UISystem::getInstance().test(); // probar el singleton de UI
+	//UISystem::Test(); // probar el metodo estatico del singleton de UI
 
-	for (int i = 0; i < 20; i++)
+	/*for (int i = 0; i < 20; i++)
 	{
 		UISystem::getInstance().createLabel(TextFormat("weeeeee %d", i), 100 + i * 10, 100 + i * 30, 12);
 	}
-
+	*/
 	///UISystem::getInstance().createLabel("Bienbenido a mi juej0", 400, 400, 48);
 
 	while (!WindowShouldClose()) {
@@ -150,7 +150,7 @@ int main()
 
 						BeginDrawing();
 						ClearBackground(DARKGRAY);
-						DrawText("ECOS DEL CREPÚSCULO", 480, 200, 40, Fade(WHITE, alpha));
+						DrawText(" STAR WARS: ECOS DEL CREPÚSCULO", 480, 200, 40, Fade(WHITE, alpha));
 						DrawText("Cargando...", 550, 350, 30, Fade(WHITE, alpha));
 						EndDrawing();
 					}
