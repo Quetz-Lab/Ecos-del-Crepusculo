@@ -582,6 +582,7 @@
     <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="..\..\include\SaveManager.h" />
     <ClInclude Include="..\..\include\sideKick.h" />
     <ClInclude Include="..\..\include\UISystem.h" />
     <ClInclude Include="..\..\include\View.h" />
@@ -592,6 +593,7 @@
     <ClCompile Include="..\..\src\Label.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Player.cpp" />
+    <ClCompile Include="..\..\src\SaveManager.cpp" />
     <ClCompile Include="..\..\src\sideKick.cpp" />
     <ClCompile Include="..\..\src\UISystem.cpp" />
     <ClCompile Include="..\..\src\View.cpp" />
