@@ -19,6 +19,10 @@ MenuOption selectedOption = PLAY;
 
 int main()
 {
+	int health = 100;
+	int level = 1;
+	int energy = 50;
+	UISystem::getInstance().InitHUD(health, level, energy);
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 	std::cout << "Inicializando sistema de juego..." << std::endl;
@@ -129,7 +133,7 @@ int main()
 			BeginDrawing();
 			ClearBackground(DARKGRAY);
 
-			DrawText("STAR WARS: ECOS DEL CREPUSCULO", 480, 200, 40, Fade( WHITE, alpha));
+			DrawText("ECOS DEL CREPUSCULO", 480, 200, 40, Fade( WHITE, alpha));
 			DrawText((selectedOption == PLAY ? "> " : "  " "Jugar"), 550, 300, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == SETTINGS ? "> " : "  " "Configuracion"), 550, 350, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == EXIT ? "> " : "  " "Salir"), 550, 400, 30,Fade (WHITE, alpha));
@@ -143,7 +147,7 @@ int main()
 
 						BeginDrawing();
 						ClearBackground(DARKGRAY);
-						DrawText(" STAR WARS: ECOS DEL CREPÚSCULO", 480, 200, 40, Fade(WHITE, alpha));
+						DrawText("ECOS DEL CREPÚSCULO", 480, 200, 40, Fade(WHITE, alpha));
 						DrawText("Cargando...", 550, 350, 30, Fade(WHITE, alpha));
 						EndDrawing();
 					}
@@ -163,6 +167,12 @@ int main()
 		// game loop a 60 fps
 		while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 		{
+
+			if (IsKeyPressed(KEY_H)) health -= 10; // Ejemplo de cambio de estado
+			if (IsKeyPressed(KEY_E)) energy -= 5;
+			if (IsKeyPressed(KEY_L)) level++;
+
+			UISystem::getInstance().UpdateHUD(health, level, energy);
 			//aqui van los update
 			//actualizar todos los gameobjects
 			for (GameObject* obj : GameObject::gameObjects)

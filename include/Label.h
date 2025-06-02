@@ -5,6 +5,7 @@ class Label :
 {
 public:
 
+	
 	const char* text = "Label";
 	int fontSize = 20;
 

@@ -579,6 +579,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\GameObject.h" />
     <ClInclude Include="..\..\include\IAttacker.h" />
+    <ClInclude Include="..\..\include\Image.h" />
     <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
@@ -590,6 +591,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\GameObject.cpp" />
+    <ClCompile Include="..\..\src\Image.cpp" />
     <ClCompile Include="..\..\src\Label.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Player.cpp" />

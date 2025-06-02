@@ -3,6 +3,7 @@
 #include <vector>
 #include "View.h"
 #include "Label.h"
+#include <string>
 class UISystem
 {
 public:
@@ -10,6 +11,16 @@ public:
 	///////////////////////////////////////////////////
 	// Patrón Singleton: Asegura que solo exista una instancia de UISystem
 	///////////////////////////////////////////////////
+
+	Label* healthLabel;
+	Label* levelLabel;
+	Label* energyLabel;
+
+	void InitHUD(int health, int level, int energy); // Inicializa los valores
+	void UpdateHUD(int health, int level, int energy); // Actualiza el HUD
+	char buffer[64];
+	char buffer2[64];
+	char buffer3[64];
 
 	static UISystem& getInstance()
 	{

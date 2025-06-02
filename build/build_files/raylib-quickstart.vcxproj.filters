@@ -29,6 +29,7 @@
     <ClInclude Include="..\..\include\UISystem.h" />
     <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\SaveManager.h" />
+    <ClInclude Include="..\..\include\Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -42,6 +43,7 @@
     <ClCompile Include="..\..\src\UISystem.cpp" />
     <ClCompile Include="..\..\src\Label.cpp" />
     <ClCompile Include="..\..\src\SaveManager.cpp" />
+    <ClCompile Include="..\..\src\Image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\icon.ico">
