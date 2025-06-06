@@ -8,6 +8,8 @@
 #include "GameObject.h"	// utility header for GameObject class
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "UISystem.h"	// utility header for UISystem class
+#include "Button.h"	// utility header for Button class
+#include "Enemy.h"	// utility header for Enemy class
 using namespace Quetz_LabEDC;
 
 enum MenuOption
@@ -172,6 +174,11 @@ int main()
 			if (IsKeyPressed(KEY_E)) energy -= 5;
 			if (IsKeyPressed(KEY_L)) level++;
 
+			/*Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, []() {
+				Enemy* newEnemy = new Enemy({ rand() % 800, rand() % 600 }, "Enemy", playerCharacter);
+				GameObject::gameObjects.push_back(newEnemy);
+				});
+			UISystem::getInstance().views.push_back(spawnEnemyButton);*/
 			UISystem::getInstance().UpdateHUD(health, level, energy);
 			//aqui van los update
 			//actualizar todos los gameobjects
