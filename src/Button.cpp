@@ -3,7 +3,7 @@
 
 Button::Button(const std::string& text, int x, int y, int w, int h, Color color, std::function<void()> callback)
     : View(x, y, w, h), text(text), fontSize(20), color(color), onClick(callback) {
-}
+} 
 
 void Button::update() {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), rect)) {

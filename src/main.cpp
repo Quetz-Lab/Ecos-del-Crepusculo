@@ -139,6 +139,7 @@ int main()
 			DrawText((selectedOption == PLAY ? "> " : "  " "Jugar"), 550, 300, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == SETTINGS ? "> " : "  " "Configuracion"), 550, 350, 30, Fade(WHITE, alpha));
 			DrawText((selectedOption == EXIT ? "> " : "  " "Salir"), 550, 400, 30,Fade (WHITE, alpha));
+			DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, WHITE);
 
 			EndDrawing();
 
@@ -174,11 +175,12 @@ int main()
 			if (IsKeyPressed(KEY_E)) energy -= 5;
 			if (IsKeyPressed(KEY_L)) level++;
 
-			/*Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, []() {
-				Enemy* newEnemy = new Enemy({ rand() % 800, rand() % 600 }, "Enemy", playerCharacter);
-				GameObject::gameObjects.push_back(newEnemy);
+			Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, []() {
+				//sideKick* newsideKck = new sideKick({ rand() % 800, rand() % 600 }, "sideKick", LoadTexture("Algo.png"));
+				//Enemy* newEnemy = new Enemy({ rand() % 800, rand() % 600 }, "Enemy", playerCharacter);
+				//GameObject::gameObjects.push_back(newEnemy);
 				});
-			UISystem::getInstance().views.push_back(spawnEnemyButton);*/
+			UISystem::getInstance().views.push_back(spawnEnemyButton);
 			UISystem::getInstance().UpdateHUD(health, level, energy);
 			//aqui van los update
 			//actualizar todos los gameobjects
@@ -195,7 +197,7 @@ int main()
 			ClearBackground(SKYBLUE);
 
 			// draw some text using the default font
-			DrawText("Ecos del Crepusculo 0.0.1", 10, 10, 24, YELLOW);
+			
 			for (GameObject* obj : GameObject::gameObjects)
 			{
 				obj->draw();
