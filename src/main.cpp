@@ -175,10 +175,10 @@ int main()
 			if (IsKeyPressed(KEY_E)) energy -= 5;
 			if (IsKeyPressed(KEY_L)) level++;
 
-			Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, []() {
+			Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, [=]() {
 				//sideKick* newsideKck = new sideKick({ rand() % 800, rand() % 600 }, "sideKick", LoadTexture("Algo.png"));
-				//Enemy* newEnemy = new Enemy({ rand() % 800, rand() % 600 }, "Enemy", playerCharacter);
-				//GameObject::gameObjects.push_back(newEnemy);
+				Enemy* newEnemy = new Enemy({ (float)(rand() % 800), (float)(rand() % 600) }, "Enemy", playerCharacter);
+				GameObject::gameObjects.push_back(newEnemy);
 				});
 			UISystem::getInstance().views.push_back(spawnEnemyButton);
 			UISystem::getInstance().UpdateHUD(health, level, energy);
