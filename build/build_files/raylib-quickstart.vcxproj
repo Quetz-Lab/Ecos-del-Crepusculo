@@ -199,7 +199,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\bin\Release\</OutDir>
     <IntDir>obj\x64\Release\raylib-quickstart\</IntDir>
-    <TargetName>Star Wars Echoes of Twilight</TargetName>
+    <TargetName>Echoes of Twilight</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
