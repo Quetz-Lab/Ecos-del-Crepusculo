@@ -10,6 +10,8 @@
 #include "UISystem.h"	// utility header for UISystem class
 #include "Button.h"	// utility header for Button class
 #include "Enemy.h"	// utility header for Enemy class
+#include "Weapon.h"	// utility header for Weapon class
+#include "Projectile.h"	// utility header for Projectile class
 using namespace Quetz_LabEDC;
 
 enum MenuOption
@@ -174,7 +176,11 @@ int main()
 			if (IsKeyPressed(KEY_H)) health -= 10; // Ejemplo de cambio de estado
 			if (IsKeyPressed(KEY_E)) energy -= 5;
 			if (IsKeyPressed(KEY_L)) level++;
-
+			if (IsKeyPressed(KEY_SPACE)) {
+				Vector2 dir = { 1.0f, 0.0f };  // Disparo hacia la derecha
+				Projectile* newProjectile = new Projectile(playerCharacter->position, dir, 5.0f);
+				GameObject::gameObjects.push_back(newProjectile);
+			}
 			Button* spawnEnemyButton = new Button("Spawn Enemigo", 50, 500, 200, 50, DARKGRAY, [=]() {
 				//sideKick* newsideKck = new sideKick({ rand() % 800, rand() % 600 }, "sideKick", LoadTexture("Algo.png"));
 				Enemy* newEnemy = new Enemy({ (float)(rand() % 800), (float)(rand() % 600) }, "Enemy", playerCharacter);
