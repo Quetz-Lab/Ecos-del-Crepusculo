@@ -201,6 +201,8 @@ int main()
 
 			// Setup the back buffer for drawing (clear color and depth buffers)
 			ClearBackground(SKYBLUE);
+			//Level::getInstance().draw();
+
 
 			// draw some text using the default font
 			
