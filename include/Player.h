@@ -3,6 +3,7 @@
 #include "IAttacker.h"
 #include "sideKick.h"
 #include "Weapon.h"
+#include "Level.h"
 namespace Quetz_LabEDC
 {
 	enum EAnimDirection

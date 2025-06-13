@@ -12,6 +12,7 @@
 #include "Enemy.h"	// utility header for Enemy class
 #include "Weapon.h"	// utility header for Weapon class
 #include "Projectile.h"	// utility header for Projectile class
+#include "Level.h"
 using namespace Quetz_LabEDC;
 
 enum MenuOption
@@ -37,6 +38,7 @@ int main()
 
 // Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
+	Level::getInstance();
 	Texture2D logo = LoadTexture("Logo.png");
 	float alpha = 0.0f;	// Variable to control the alpha transparency of the logo
 	float fadeSpeed = 0.5f;	// Speed at which the logo fades in and out
@@ -201,7 +203,7 @@ int main()
 
 			// Setup the back buffer for drawing (clear color and depth buffers)
 			ClearBackground(SKYBLUE);
-			//Level::getInstance().draw();
+			Level::getInstance().draw();
 
 
 			// draw some text using the default font

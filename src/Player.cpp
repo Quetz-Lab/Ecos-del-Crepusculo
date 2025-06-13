@@ -4,25 +4,31 @@ using namespace Quetz_LabEDC;
 
 void Quetz_LabEDC::Player::update()
 {
+	Vector2 newpos;
+	newpos = position;
 	if (IsKeyDown(KEY_A))
 	{
-		position.x -= speed * GetFrameTime();
+		newpos.x -= speed * GetFrameTime();
 		animData.direction = ANIM_LEFT;
 	}
 	if (IsKeyDown(KEY_D))
 	{
-		position.x += speed * GetFrameTime();
+		newpos.x += speed * GetFrameTime();
 		animData.direction = ANIM_RIGHT;
 	}
 	if (IsKeyDown(KEY_W))
 	{
-		position.y -= speed * GetFrameTime();
+		newpos.y -= speed * GetFrameTime();
 		animData.direction = ANIM_UP;
 	}
 	if (IsKeyDown(KEY_S))
 	{
-		position.y += speed * GetFrameTime();
+		newpos.y += speed * GetFrameTime();
 		animData.direction = ANIM_DOWN;
+	}
+	if (!Level::getInstance().CheckCollision(newpos))
+	{
+		position = newpos; //solo mover si no hay colision
 	}
 
 	////calcular el frame de la animacion
