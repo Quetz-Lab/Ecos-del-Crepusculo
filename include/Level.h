@@ -60,7 +60,7 @@ public:
 		int index = (point.y * collisionMaskImg.width + point.x);
 		
 		std::cout << "valor en pixel (" << point.x << "," << point.y << "): " << (int)imgdata[index] << std::endl;
-		return (imgdata[index] == 0);
+		return (imgdata[index] != 0);
 		//return false;
 	}
 

@@ -24,10 +24,12 @@ MenuOption selectedOption = PLAY;
 
 int main()
 {
+
 	int health = 100;
 	int level = 1;
 	int energy = 50;
 	UISystem::getInstance().InitHUD(health, level, energy);
+	int currentEra = 0;  // 0: Prehistoria, 1: Edad Media, 2: Futuro...
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 	std::cout << "Inicializando sistema de juego..." << std::endl;
@@ -74,7 +76,7 @@ int main()
 	//El jugador
 	// este constructor ya no existe, ahora el Player establece su textura
 	//Player* playerCharacter = new Player({ 0,0 }, "Player1", LoadTexture("boy.png"));
-	Player* playerCharacter = new Player({ 100,100 }, "Player1");
+	Player* playerCharacter = new Player({ 270,480 }, "Player1");
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion
