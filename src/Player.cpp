@@ -26,6 +26,23 @@ void Quetz_LabEDC::Player::update()
 		newpos.y += speed * GetFrameTime();
 		animData.direction = ANIM_DOWN;
 	}
+
+	if (IsGamepadAvailable(0)) {
+		float axisX = GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X);
+		float axisY = GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y);
+
+		if (fabs(axisX) > 0.2f) { // Umbral para evitar movimiento no intencionado
+			newpos.x += axisX * speed * GetFrameTime();
+			animData.direction = (axisX < 0) ? ANIM_LEFT : ANIM_RIGHT;
+		}
+
+		if (fabs(axisY) > 0.2f) {
+			newpos.y += axisY * speed * GetFrameTime();
+			animData.direction = (axisY < 0) ? ANIM_UP : ANIM_DOWN;
+		}
+	}
+
+
 	if (!Level::getInstance().CheckCollision(newpos))
 	{
 		position = newpos; //solo mover si no hay colision

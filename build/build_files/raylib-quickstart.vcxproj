@@ -178,7 +178,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\bin\Debug\</OutDir>
     <IntDir>obj\x64\Debug\raylib-quickstart\</IntDir>
-    <TargetName>raylib-quickstart</TargetName>
+    <TargetName>Echoes of Twilight</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
