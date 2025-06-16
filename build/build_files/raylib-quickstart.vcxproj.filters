@@ -34,6 +34,8 @@
     <ClInclude Include="..\..\include\ImageView.h" />
     <ClInclude Include="..\..\include\Level.h" />
     <ClInclude Include="..\..\include\Projectile.h" />
+    <ClInclude Include="..\..\include\Item.h" />
+    <ClInclude Include="..\..\include\Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -52,6 +54,7 @@
     <ClCompile Include="..\..\src\ImageView.cpp" />
     <ClCompile Include="..\..\src\Level.cpp" />
     <ClCompile Include="..\..\src\Projectile.cpp" />
+    <ClCompile Include="..\..\src\Inventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\icon.ico">
