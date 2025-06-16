@@ -162,11 +162,14 @@ int main()
 					}
 					break;  // Inicia el juego
 				}
-			}
 				if (selectedOption == EXIT) {
 					CloseWindow();
 					return 0;
 				}
+
+
+			}
+				
 	}
 
 		
