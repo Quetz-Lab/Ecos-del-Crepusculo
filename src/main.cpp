@@ -29,6 +29,7 @@ int main()
 	int level = 1;
 	int energy = 50;
 	UISystem::getInstance().InitHUD(health, level, energy);
+	
 	int currentEra = 0;  // 0: Prehistoria, 1: Edad Media, 2: Futuro...
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
@@ -67,7 +68,8 @@ int main()
 	UnloadTexture(logo);
 
 	//std::vector<GameObject*> gameObjects;
-
+	Texture2D hudBar = LoadTexture("HealthBar(Frame).png");
+	SetTextureFilter(hudBar, TEXTURE_FILTER_POINT); // Evita desenfoque en escalado
 	GameObject* myObj = new GameObject({ 200,200 }, "myObj", LoadTexture("mono.png"));
 	myObj->DisplayName = true;
 	//push_back agrega un elemento al final del arreglo
@@ -172,13 +174,15 @@ int main()
 				
 	}
 
-		
-
+	Level::getInstance().loadTileset("TileSetDeco.png"); // Load the tileset for the level
+	Level::getInstance().loadMapFromFile("mapa.txt"); // Load the map from a file
+	Level::getInstance().loadDecorationFromFile("decoration.txt"); // Load the decoration from a file
 
 
 		// game loop a 60 fps
 		while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 		{
+			
 
 			if (IsKeyPressed(KEY_H)) health -= 10; // Ejemplo de cambio de estado
 			if (IsKeyPressed(KEY_E)) energy -= 5;
@@ -209,7 +213,15 @@ int main()
 			// Setup the back buffer for drawing (clear color and depth buffers)
 			ClearBackground(SKYBLUE);
 			Level::getInstance().draw();
+			//DrawRectangle(10, 10, 100, 100, RED); // Si esto aparece, Raylib está dibujando bien.
+			//DrawRectangle(10, 10, 100, 20, RED); // Test visual
 
+			//DrawTexture(hudBar, 10, 10, WHITE); // draw the health bar frame
+			Rectangle sourceRec = { 0, 0, hudBar.width, hudBar.height };  // Región completa de la imagen
+			Rectangle destRec = { 10, 10, hudBar.width * 4, hudBar.height * 4 }; // Escalado x4
+			Vector2 origin = { 0, 0 };  // Punto de origen
+
+			DrawTexturePro(hudBar, sourceRec, destRec, origin, 0.0f, WHITE); // draw the health bar frame with source and destination rectangles
 
 			// draw some text using the default font
 			

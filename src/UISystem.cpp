@@ -35,6 +35,7 @@ void UISystem::update()
 
 void UISystem::InitHUD(int health, int level, int energy) {
 	healthLabel = createLabel(("Vida: " + std::to_string(health)).c_str(), 50, 30);
+	
 	levelLabel = createLabel(("Nivel: " + std::to_string(level)).c_str(), 50, 60);
 	energyLabel = createLabel(("Energía: " + std::to_string(energy)).c_str(), 50, 90);
 }

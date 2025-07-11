@@ -1,6 +1,8 @@
 #include "Level.h"
 
 Level* Level::instance = nullptr;
+
+
 //Level::Level(const std::string& name, const char* backgroundPath) : name(name) {
 //    background = LoadTexture(backgroundPath);
 //}
