@@ -2,29 +2,58 @@
 
 using namespace Quetz_LabEDC;
 
+void Quetz_LabEDC::Player::start()
+{
+	scrollBorder = GetScreenHeight() * 0.3f;
+	position = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+}
+
 void Quetz_LabEDC::Player::update()
 {
 	Vector2 newpos;
+
 	newpos = position;
+	//position = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
 	if (IsKeyDown(KEY_A))
 	{
 		newpos.x -= speed * GetFrameTime();
+		if (newpos.x < scrollBorder)
+		{
+			newpos.x = scrollBorder;
+			CameraOffset.x -= speed * GetFrameTime();
+		}
 		animData.direction = ANIM_LEFT;
 	}
 	if (IsKeyDown(KEY_D))
 	{
 		newpos.x += speed * GetFrameTime();
+		if (newpos.x > GetScreenWidth() - scrollBorder)
+		{
+			newpos.x = GetScreenWidth() - scrollBorder;
+			CameraOffset.x += speed * GetFrameTime();
+		}
 		animData.direction = ANIM_RIGHT;
 	}
 	if (IsKeyDown(KEY_W))
 	{
 		newpos.y -= speed * GetFrameTime();
+		if (newpos.y < scrollBorder)
+		{
+			newpos.y = scrollBorder;
+			CameraOffset.y -=  speed * GetFrameTime();
+		}
 		animData.direction = ANIM_UP;
 	}
 	if (IsKeyDown(KEY_S))
 	{
 		newpos.y += speed * GetFrameTime();
+		if (newpos.y > GetScreenHeight() - scrollBorder)
+		{
+			newpos.y = scrollBorder;
+			CameraOffset.y += speed * GetFrameTime();
+		}
 		animData.direction = ANIM_DOWN;
+
 	}
 
 	if (IsGamepadAvailable(0)) {

@@ -234,10 +234,7 @@ int main()
 			// end the frame and get ready for the next one  (display frame, poll input, etc...)
 			EndDrawing();
 		}
-
-
 		// destroy the window and cleanup the OpenGL context
 		CloseWindow();
 		return 0;
-	
 };

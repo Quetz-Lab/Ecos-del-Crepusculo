@@ -39,7 +39,8 @@ namespace Quetz_LabEDC
 		const char* weaponPrompt = "Presiona F para recoger arma";
 	public:
 		float speed = 10.0f;
-
+		float scrollBorder = 100;
+		Vector2 CameraOffset = { 0,0 };
 		//constructor heredado de GameObject
 		Player(Vector2 pos, std::string _name) :
 			weapon(nullptr)
@@ -57,7 +58,7 @@ namespace Quetz_LabEDC
 			animData.direction = ANIM_DOWN;
 		}
 
-
+		void start();
 		void update() override;
 		//sobrecargar Draw para dibujar el sprite
 		void draw() override;
