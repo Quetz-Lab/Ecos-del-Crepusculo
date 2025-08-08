@@ -586,11 +586,14 @@
     <ClInclude Include="..\..\include\Item.h" />
     <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\Level.h" />
+    <ClInclude Include="..\..\include\LinkedList.h" />
+    <ClInclude Include="..\..\include\LLNode.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\Projectile.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\include\SaveManager.h" />
     <ClInclude Include="..\..\include\sideKick.h" />
+    <ClInclude Include="..\..\include\Singleton.h" />
     <ClInclude Include="..\..\include\UISystem.h" />
     <ClInclude Include="..\..\include\View.h" />
     <ClInclude Include="..\..\include\Weapon.h" />
