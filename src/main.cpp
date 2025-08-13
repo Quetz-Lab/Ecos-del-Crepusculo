@@ -24,7 +24,67 @@ enum MenuOption
 };
 MenuOption selectedOption = PLAY;
 // variable to keep track of the selected menu option
+template<typename T>
+class Entity {
+public:
+	T id;
+	Vector2 position;
+	Vector2 velocity;
 
+	Entity(T id, Vector2 pos) : id(id), position(pos), velocity({ 0, 0 }) {}
+
+	virtual void Update(float delta) {
+		position.x += velocity.x * delta;
+		position.y += velocity.y * delta;
+	}
+
+	virtual void Draw() const = 0;
+};
+
+template<typename T>
+class StateMachine {
+private:
+	T currentState;
+	std::unordered_map<T, std::function<void()>> stateActions;
+
+public:
+	StateMachine(T initialState) : currentState(initialState) {}
+
+	void AddState(T state, std::function<void()> action) {
+		stateActions[state] = action;
+	}
+
+	void ChangeState(T newState) {
+		currentState = newState;
+	}
+
+	void Update() {
+		if (stateActions.count(currentState)) {
+			stateActions[currentState]();
+		}
+	}
+
+	T GetState() const { return currentState; }
+};
+
+template<typename T>
+class SymbolicHUD {
+private:
+	std::vector<std::pair<T, Texture2D>> symbols;
+
+public:
+	void AddSymbol(T key, Texture2D texture) {
+		symbols.emplace_back(key, texture);
+	}
+
+	void Draw(const T& currentState, Vector2 position) const {
+		for (const auto& [key, texture] : symbols) {
+			if (key == currentState) {
+				DrawTexture(texture, position.x, position.y, WHITE);
+			}
+		}
+	}
+};
 int main()
 {
 
