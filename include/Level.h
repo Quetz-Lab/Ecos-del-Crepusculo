@@ -29,7 +29,12 @@ public:
 	void loadTileset(const char* path)
 	{
 		tileset = LoadTexture(path);
-		SetTextureFilter(tileset, TEXTURE_FILTER_POINT); // Para que se vea nítido
+		if (tileset.id == 0) {
+			std::cerr << "Tile no encontrada: " << path << std::endl;
+			throw std::runtime_error("Tile no encontrada");
+		}
+		SetTextureFilter(tileset, TEXTURE_FILTER_POINT);
+
 	}
 
 	Texture2D background;
@@ -63,27 +68,30 @@ public:
 	{
 		std::ifstream file(filename);
 		if (!file.is_open()) {
-			std::cerr << "No se pudo abrir el archivo del mapa: " << filename << std::endl;
-			return;
+			std::cerr << "Mapa no encontrado: " << filename << std::endl;
+			throw std::runtime_error("Mapa no encontrado");
 		}
-
 
 		std::string line;
 		int y = 0;
-
 		while (std::getline(file, line) && y < MAP_HEIGHT) {
 			std::istringstream ss(line);
 			int value;
 			int x = 0;
-
 			while (ss >> value && x < MAP_WIDTH) {
 				tileMap[y][x] = value;
 				x++;
 			}
-
+			if (x != MAP_WIDTH) {
+				std::cerr << "Mapa malformado en la fila " << y << std::endl;
+				throw std::runtime_error("Mapa malformado");
+			}
 			y++;
 		}
-
+		if (y != MAP_HEIGHT) {
+			std::cerr << "Mapa malformado: número de filas incorrecto" << std::endl;
+			throw std::runtime_error("Mapa malformado");
+		}
 		file.close();
 		std::cout << "Mapa cargado correctamente desde " << filename << std::endl;
 
@@ -93,8 +101,8 @@ public:
 	{
 		std::ifstream file(filename);
 		if (!file.is_open()) {
-			std::cerr << "No se pudo abrir el archivo de decoracion: " << filename << std::endl;
-			return;
+			std::cerr << "Decoración no encontrada: " << filename << std::endl;
+			throw std::runtime_error("Decoración no encontrada");
 		}
 		std::string line;
 		int y = 0;
@@ -106,10 +114,18 @@ public:
 				decorMap[y][x] = value;
 				x++;
 			}
+			if (x != MAP_WIDTH) {
+				std::cerr << "Decoración malformada en la fila " << y << std::endl;
+				throw std::runtime_error("Decoración malformada");
+			}
 			y++;
 		}
+		if (y != MAP_HEIGHT) {
+			std::cerr << "Decoración malformada: número de filas incorrecto" << std::endl;
+			throw std::runtime_error("Decoración malformada");
+		}
 		file.close();
-		std::cout << "Decoracion cargada correctamente desde " << filename << std::endl;
+		std::cout << "Decoración cargada correctamente desde " << filename << std::endl;
 	}
 	
 	Level(const std::string& name, const char* backgroundPath);

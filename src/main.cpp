@@ -249,7 +249,16 @@ int main()
 	Level::getInstance().loadTileset("TileSetDeco.png"); // Load the tileset for the level
 	Level::getInstance().loadMapFromFile("mapa.txt"); // Load the map from a file
 	Level::getInstance().loadDecorationFromFile("decoration.txt"); // Load the decoration from a file
-
+	try {
+		Level::getInstance().loadTileset("TileSetDeco.png");
+		Level::getInstance().loadMapFromFile("mapa.txt");
+		Level::getInstance().loadDecorationFromFile("decoration.txt");
+	}
+	catch (const std::exception& ex) {
+		std::cerr << "Error crítico: " << ex.what() << std::endl;
+		CloseWindow();
+		return 1;
+	}
 
 		// game loop a 60 fps
 		while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
@@ -306,6 +315,7 @@ int main()
 			// end the frame and get ready for the next one  (display frame, poll input, etc...)
 			EndDrawing();
 		}
+		
 		// destroy the window and cleanup the OpenGL context
 		CloseWindow();
 		return 0;
