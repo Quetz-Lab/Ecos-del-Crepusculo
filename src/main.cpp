@@ -151,6 +151,7 @@ int main()
 	// este constructor ya no existe, ahora el Player establece su textura
 	//Player* playerCharacter = new Player({ 0,0 }, "Player1", LoadTexture("boy.png"));
 	Player* playerCharacter = new Player({ 270,480 }, "Player1");
+	playerCharacter->start(); // Inicializar el jugador
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion

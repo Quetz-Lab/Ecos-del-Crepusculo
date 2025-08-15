@@ -4,6 +4,7 @@
 #include "sideKick.h"
 #include "Weapon.h"
 #include "Level.h"
+#include "Inventory.h"
 namespace Quetz_LabEDC
 {
 	enum EAnimDirection
@@ -31,6 +32,7 @@ namespace Quetz_LabEDC
 		//info de su animacion
 		SAnimData animData;
 
+		Inventory* inventory;
 		//instrumento que le permite atacar
 		IAttacker* weapon;
 		sideKick* sdk;
@@ -57,7 +59,7 @@ namespace Quetz_LabEDC
 			position = pos;
 			animData.direction = ANIM_DOWN;
 		}
-
+		Inventory* GetInventory() { return inventory; }
 		void start();
 		void update() override;
 		//sobrecargar Draw para dibujar el sprite

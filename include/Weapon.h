@@ -11,6 +11,8 @@ namespace  Quetz_LabEDC
 	class Weapon :public GameObject, public IAttacker
 	{
 	public:
+	
+		std::string GetName() const { return name; }
 
 		//quien carga el arma
 		Player* owner;
