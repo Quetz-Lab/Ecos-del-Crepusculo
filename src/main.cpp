@@ -13,6 +13,9 @@
 #include "Weapon.h"	// utility header for Weapon class
 #include "Projectile.h"	// utility header for Projectile class
 #include "Level.h"
+#include "Singleton.h"
+#include "LinkedList.h"
+
 using namespace Quetz_LabEDC;
 
 enum MenuOption
@@ -101,6 +104,15 @@ int main()
 
 // Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
+	std::cout << "Prueba de lista ligada" << std::endl;
+	int num = 8;
+
+	LLNode<int>* nodo = new LLNode<int>(&num);
+
+	LinkedList<int>* lista = new LinkedList<int>();
+
+	lista->addNode(new int(16));
+	lista->RemoveLastNode();
 	Level::getInstance();
 	Texture2D logo = LoadTexture("Logo.png");
 	float alpha = 0.0f;	// Variable to control the alpha transparency of the logo
@@ -139,6 +151,7 @@ int main()
 	// este constructor ya no existe, ahora el Player establece su textura
 	//Player* playerCharacter = new Player({ 0,0 }, "Player1", LoadTexture("boy.png"));
 	Player* playerCharacter = new Player({ 270,480 }, "Player1");
+	playerCharacter->start(); // Inicializar el jugador
 	playerCharacter->speed = 200.0f;
 	//agregando el player pero con un cast explicito estatico
 	// estatico quiere decir que se realiza en tiempo de compilacion
@@ -237,7 +250,16 @@ int main()
 	Level::getInstance().loadTileset("TileSetDeco.png"); // Load the tileset for the level
 	Level::getInstance().loadMapFromFile("mapa.txt"); // Load the map from a file
 	Level::getInstance().loadDecorationFromFile("decoration.txt"); // Load the decoration from a file
-
+	try {
+		Level::getInstance().loadTileset("TileSetDeco.png");
+		Level::getInstance().loadMapFromFile("mapa.txt");
+		Level::getInstance().loadDecorationFromFile("decoration.txt");
+	}
+	catch (const std::exception& ex) {
+		std::cerr << "Error crítico: " << ex.what() << std::endl;
+		CloseWindow();
+		return 1;
+	}
 
 		// game loop a 60 fps
 		while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
@@ -275,14 +297,14 @@ int main()
 			Level::getInstance().draw();
 			//DrawRectangle(10, 10, 100, 100, RED); // Si esto aparece, Raylib está dibujando bien.
 			//DrawRectangle(10, 10, 100, 20, RED); // Test visual
-
+			
 			//DrawTexture(hudBar, 10, 10, WHITE); // draw the health bar frame
 			Rectangle sourceRec = { 0, 0, hudBar.width, hudBar.height };  // Región completa de la imagen
 			Rectangle destRec = { 10, 10, hudBar.width * 4, hudBar.height * 4 }; // Escalado x4
 			Vector2 origin = { 0, 0 };  // Punto de origen
 
 			DrawTexturePro(hudBar, sourceRec, destRec, origin, 0.0f, WHITE); // draw the health bar frame with source and destination rectangles
-
+			
 			// draw some text using the default font
 			
 			for (GameObject* obj : GameObject::gameObjects)
@@ -294,10 +316,8 @@ int main()
 			// end the frame and get ready for the next one  (display frame, poll input, etc...)
 			EndDrawing();
 		}
-
-
+		
 		// destroy the window and cleanup the OpenGL context
 		CloseWindow();
 		return 0;
-	
 };

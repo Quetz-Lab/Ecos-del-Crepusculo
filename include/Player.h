@@ -4,6 +4,7 @@
 #include "sideKick.h"
 #include "Weapon.h"
 #include "Level.h"
+#include "Inventory.h"
 namespace Quetz_LabEDC
 {
 	enum EAnimDirection
@@ -31,6 +32,7 @@ namespace Quetz_LabEDC
 		//info de su animacion
 		SAnimData animData;
 
+		Inventory* inventory;
 		//instrumento que le permite atacar
 		IAttacker* weapon;
 		sideKick* sdk;
@@ -39,7 +41,8 @@ namespace Quetz_LabEDC
 		const char* weaponPrompt = "Presiona F para recoger arma";
 	public:
 		float speed = 10.0f;
-
+		float scrollBorder = 100;
+		Vector2 CameraOffset = { 0,0 };
 		//constructor heredado de GameObject
 		Player(Vector2 pos, std::string _name) :
 			weapon(nullptr)
@@ -56,8 +59,8 @@ namespace Quetz_LabEDC
 			position = pos;
 			animData.direction = ANIM_DOWN;
 		}
-
-
+		Inventory* GetInventory() { return inventory; }
+		void start();
 		void update() override;
 		//sobrecargar Draw para dibujar el sprite
 		void draw() override;

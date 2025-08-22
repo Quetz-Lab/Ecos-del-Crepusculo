@@ -36,6 +36,9 @@
     <ClInclude Include="..\..\include\Projectile.h" />
     <ClInclude Include="..\..\include\Item.h" />
     <ClInclude Include="..\..\include\Inventory.h" />
+    <ClInclude Include="..\..\include\Singleton.h" />
+    <ClInclude Include="..\..\include\LLNode.h" />
+    <ClInclude Include="..\..\include\LinkedList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">

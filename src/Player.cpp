@@ -2,29 +2,66 @@
 
 using namespace Quetz_LabEDC;
 
+void Quetz_LabEDC::Player::start()
+{
+	inventory = new Inventory(); //crear el inventario si no existe
+	scrollBorder = GetScreenHeight() * 0.3f;
+	position = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+}
+
 void Quetz_LabEDC::Player::update()
 {
 	Vector2 newpos;
+
 	newpos = position;
+	//position = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+	if (IsKeyDown(KEY_I))
+	{
+		
+		inventory->PickupWeapon(new Weapon({ 0,0 }, "Espada", LoadTexture("Espada.png")), this);
+		//inventory->PickupWeapon(new Weapon({ 0,0 }, "Arco", LoadTexture("Arco.png")), this);
+		//inventory->PickupWeapon(new Weapon({ 0,0 }, "Bomba", LoadTexture("Bomba.png")), this);
+	}
 	if (IsKeyDown(KEY_A))
 	{
 		newpos.x -= speed * GetFrameTime();
+		if (newpos.x < scrollBorder)
+		{
+			newpos.x = scrollBorder;
+			CameraOffset.x -= speed * GetFrameTime();
+		}
 		animData.direction = ANIM_LEFT;
 	}
 	if (IsKeyDown(KEY_D))
 	{
 		newpos.x += speed * GetFrameTime();
+		if (newpos.x > GetScreenWidth() - scrollBorder)
+		{
+			newpos.x = GetScreenWidth() - scrollBorder;
+			CameraOffset.x += speed * GetFrameTime();
+		}
 		animData.direction = ANIM_RIGHT;
 	}
 	if (IsKeyDown(KEY_W))
 	{
 		newpos.y -= speed * GetFrameTime();
+		if (newpos.y < scrollBorder)
+		{
+			newpos.y = scrollBorder;
+			CameraOffset.y -=  speed * GetFrameTime();
+		}
 		animData.direction = ANIM_UP;
 	}
 	if (IsKeyDown(KEY_S))
 	{
 		newpos.y += speed * GetFrameTime();
+		if (newpos.y > GetScreenHeight() - scrollBorder)
+		{
+			newpos.y = scrollBorder;
+			CameraOffset.y += speed * GetFrameTime();
+		}
 		animData.direction = ANIM_DOWN;
+
 	}
 
 	if (IsGamepadAvailable(0)) {
@@ -62,9 +99,10 @@ void Quetz_LabEDC::Player::update()
 	}
 
 	//si tiene arma, hacer que se mueva con el jugador
-	if (weapon)
+	
+	if (inventory != nullptr && inventory->GetCurrentWeapon() != nullptr)
 	{
-		Weapon* w = dynamic_cast<Weapon*>(weapon);
+		Weapon* w = inventory->GetCurrentWeapon();
 		w->position = Vector2Add(position, w->offset);
 	}
 
