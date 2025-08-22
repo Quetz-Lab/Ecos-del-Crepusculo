@@ -164,6 +164,10 @@ if (downloadRaylib) then
         
         files {"../src/**.c", "../src/**.cpp", "../src/**.h", "../src/**.hpp", "../include/**.h", "../include/**.hpp"}
         
+        -- Include test files for debug builds
+        filter {"configurations:Debug or Debug_RGFW"}
+            files {"../tests/**.cpp", "../tests/**.h"}
+        
         filter {"system:windows"}
             files {"../src/*.rc", "../src/*.ico"}
             
@@ -177,6 +181,7 @@ if (downloadRaylib) then
         
         includedirs { "../src" }
         includedirs { "../include" }
+        includedirs { "../tests" }
 
         links {"raylib"}
 

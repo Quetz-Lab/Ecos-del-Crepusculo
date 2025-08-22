@@ -1,0 +1,23 @@
+# Makefile simple para pruebas sin dependencias externas
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
+
+# Archivo de pruebas simple
+TEST_EXECUTABLE = simple_tests
+
+# Regla por defecto
+all: $(TEST_EXECUTABLE)
+
+# Compilar pruebas simples
+$(TEST_EXECUTABLE): SimpleTests.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $<
+
+# Ejecutar pruebas
+test: $(TEST_EXECUTABLE)
+	./$(TEST_EXECUTABLE)
+
+# Limpiar archivos generados
+clean:
+	rm -f $(TEST_EXECUTABLE)
+
+.PHONY: all test clean
