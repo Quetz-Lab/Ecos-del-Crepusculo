@@ -278,7 +278,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>raylib.lib;winmm.lib;gdi32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ejemploDLL.lib;raylib.lib;winmm.lib;gdi32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -586,6 +586,7 @@
     <ClInclude Include="..\..\include\Item.h" />
     <ClInclude Include="..\..\include\Label.h" />
     <ClInclude Include="..\..\include\Level.h" />
+    <ClInclude Include="..\..\include\MyDLLWrapper.h" />
     <ClInclude Include="..\..\include\Player.h" />
     <ClInclude Include="..\..\include\Projectile.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
@@ -604,6 +605,7 @@
     <ClCompile Include="..\..\src\Label.cpp" />
     <ClCompile Include="..\..\src\Level.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\MyDLLWrapper.cpp" />
     <ClCompile Include="..\..\src\Player.cpp" />
     <ClCompile Include="..\..\src\Projectile.cpp" />
     <ClCompile Include="..\..\src\SaveManager.cpp" />

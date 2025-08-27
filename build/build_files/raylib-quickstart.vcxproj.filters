@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\include\Projectile.h" />
     <ClInclude Include="..\..\include\Item.h" />
     <ClInclude Include="..\..\include\Inventory.h" />
+    <ClInclude Include="..\..\include\MyDLLWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -55,6 +56,7 @@
     <ClCompile Include="..\..\src\Level.cpp" />
     <ClCompile Include="..\..\src\Projectile.cpp" />
     <ClCompile Include="..\..\src\Inventory.cpp" />
+    <ClCompile Include="..\..\src\MyDLLWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\icon.ico">
